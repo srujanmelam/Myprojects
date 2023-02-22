@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss:SSS z (XXX)} %t %-5p %c{1}:%L - %X{order.id}  %m%n"/>
+        	
+        </Console>
+         <RollingFile name="appLog" fileName="E:/logs/app.log"
+      filePattern="logs/${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+        <PatternLayout>
+            <Pattern> %d{yyyy-MM-dd HH:mm:ss:SSS z (XXX)} %t %-5p %c{1}:%L - %X{order.id}  %m%n</Pattern>
+        </PatternLayout>
+        <Policies>
+            <OnStartupTriggeringPolicy />
+            <TimeBasedTriggeringPolicy />
+            <SizeBasedTriggeringPolicy size="50 MB" />
+        </Policies>
+        <DefaultRolloverStrategy max="200" />
+    </RollingFile>
+    </Appenders>
+   
+    
+    
+     <Loggers>
+    
+  
+        <Logger name="simpleapp" level="INFO">
+        <AppenderRef ref="appLog"/>
+        </Logger>
+        <Root level="ERROR">
+            <AppenderRef ref="LogToConsole"/>
+        </Root>
+    </Loggers>
+</Configuration>
